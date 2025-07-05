@@ -1,5 +1,6 @@
 
 
+dj-database-url>=1.0.0
 
 
 # Database and API
