@@ -1,0 +1,57 @@
+
+# Requirements for Agent1 Customer Support System
+# Install with: pip install -r requirements.txt
+
+# Core CrewAI and AI Tools
+crewai>=0.140.0
+crewai-tools>=0.49.0
+
+# Database and API
+pymongo>=4.10.1
+requests>=2.31.0
+
+# Environment and Configuration
+python-dotenv>=1.0.1
+
+# Django Integration (if not already installed)
+django>=4.2.0
+djangorestframework>=3.14.0
+django-cors-headers>=4.3.0
+
+# Logging and Monitoring
+structlog>=23.2.0
+
+# Optional: Enhanced JSON processing
+orjson>=3.9.0
+
+# Optional: For better HTTP requests
+httpx>=0.25.0
+
+# Optional: For better async support
+asyncio>=3.4.3
+
+# Requirements for Agent1 LangChain Implementation
+# No CrewAI dependencies - pure LangChain approach
+
+# Core LangChain and Ollama
+langchain
+langchain-ollama
+langchain-core
+langchain-community
+
+# Essential utilities
+python-dotenv==1.0.1
+typing-extensions==4.12.2
+
+# Optional but recommended for production
+pydantic==2.8.2
+requests==2.32.3
+
+# For Django integration (if needed)
+# django>=4.2.0
+# djangorestframework>=3.14.0
+# django-cors-headers>=4.0.0
+
+# Development and testing
+# pytest>=7.0.0
+# black>=23.0.0
