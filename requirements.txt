@@ -6,6 +6,7 @@
 # Environment and Configuration
 python-dotenv>=1.0.1
 django-filter>=23.5
+dj_database_url>=1.0.0
 
 # Django Integration (if not already installed)
 django>=4.2.0
