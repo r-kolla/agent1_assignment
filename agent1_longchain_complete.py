@@ -1,4 +1,4 @@
-import os
+import os, httpx
 import json
 from typing import Dict, List, Any, Optional
 from dotenv import load_dotenv
@@ -103,23 +103,18 @@ MOCK_COURSES = [
     }
 ]
 
+API_BASE = os.getenv("AGENT1_API_BASE", "http://127.0.0.1:8000/api")
 
 @tool
 def search_client(query: str) -> str:
-    """Search for a client by name, email, or phone number in the database."""
-    query = query.lower().strip()
-    for client in MOCK_CLIENTS:
-        if (query in client["name"].lower() or 
-            query in client["email"].lower() or 
-            query in client["phone"]):
-            services = ", ".join(client["enrolled_services"])
-            return f"""Client Found:
-- Name: {client['name']}
-- Email: {client['email']}
-- Phone: {client['phone']}
-- Enrolled Services: {services}
-- Status: {client['status']}"""
-    return f"No client found matching '{query}'. Please check the spelling or try a different search term."
+    """Search for a client by name, email, or phone."""
+    try:
+        r = httpx.get(f"{API_BASE}/agent1/clients/search/", params={'q': query}, timeout=10)
+        r.raise_for_status()
+        data = r.json()
+        return json.dumps(data, indent=2) if data else "No client found."
+    except Exception as e:
+        return f"Error contacting backend: {e}"
 
 @tool
 def check_order_status(order_id: str) -> str:
