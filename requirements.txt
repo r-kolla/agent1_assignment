@@ -48,9 +48,9 @@ pydantic==2.8.2
 requests==2.32.3
 
 # For Django integration (if needed)
-# django>=4.2.0
-# djangorestframework>=3.14.0
-# django-cors-headers>=4.0.0
+ django>=4.2.0
+ djangorestframework>=3.14.0
+django-cors-headers>=4.0.0
 
 # Development and testing
 # pytest>=7.0.0
