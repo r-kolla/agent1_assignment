@@ -3,8 +3,6 @@
 
 
 # Database and API
-requests>=2.31.0
-
 # Environment and Configuration
 python-dotenv>=1.0.1
 
@@ -21,19 +19,17 @@ orjson>=3.9.0
 
 # Optional: For better HTTP requests
 httpx>=0.25.0
-
-# Optional: For better async support
-asyncio>=3.4.3
-
+gunicorn>=21.2.0
 
 # Core LangChain and Ollama
 langchain
 langchain-ollama
 langchain-core
 langchain-community
+psycopg2-binary>=2.9.9
 
 # Essential utilities
-python-dotenv==1.0.1
+
 typing-extensions==4.12.2
 
 # Optional but recommended for production
@@ -41,9 +37,6 @@ pydantic==2.8.2
 requests==2.32.3
 
 # For Django integration (if needed)
- django>=4.2.0
- djangorestframework>=3.14.0
-django-cors-headers>=4.0.0
 
 # Development and testing
 # pytest>=7.0.0
