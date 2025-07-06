@@ -6,6 +6,7 @@ const API_URL = import.meta.env.VITE_AGENT1_API_URL;
 export default function AgentChat() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false); // added
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function AgentChat() {
     if (!input.trim()) return;
     setMessages([...messages, { from: "user", text: input }]);
     setInput("");
+    setLoading(true); // start loading
     try {
       const res = await axios.post(API_URL, { message: input });
       setMessages((msgs) => [
@@ -28,6 +30,8 @@ export default function AgentChat() {
         ...msgs,
         { from: "agent", text: "Error: " + err.message },
       ]);
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -43,8 +47,8 @@ export default function AgentChat() {
     >
       <div
         style={{
-          width: 420,      // Fixed width
-          height: 520,     // Fixed height
+          width: 420,
+          height: 520,
           background: "#fff",
           borderRadius: 12,
           boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
@@ -76,7 +80,7 @@ export default function AgentChat() {
             border: "1px solid #e5e7eb",
           }}
         >
-          {messages.length === 0 && (
+          {messages.length === 0 && !loading && (
             <div style={{ color: "#aaa", textAlign: "center", fontSize: 15 }}>
               Start the conversation
             </div>
@@ -110,6 +114,32 @@ export default function AgentChat() {
               </div>
             </div>
           ))}
+          {loading && (
+            <div
+              style={{
+                textAlign: "left",
+                margin: "10px 0",
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <div
+                style={{
+                  background: "#e5e7eb",
+                  color: "#222",
+                  borderRadius: 10,
+                  padding: "8px 13px",
+                  maxWidth: "75%",
+                  fontSize: 15,
+                  fontWeight: 400,
+                  fontStyle: "italic",
+                  opacity: 0.7,
+                }}
+              >
+                Agent is typing...
+              </div>
+            </div>
+          )}
           <div ref={chatEndRef} />
         </div>
         <form
@@ -133,6 +163,7 @@ export default function AgentChat() {
             placeholder="Type your message…"
             autoFocus
             autoComplete="off"
+            disabled={loading} // disable during loading
           />
           <button
             type="submit"
@@ -144,28 +175,32 @@ export default function AgentChat() {
               color: "#fff",
               fontWeight: 500,
               fontSize: 15,
-              cursor: "pointer",
+              cursor: loading ? "not-allowed" : "pointer",
               transition: "background 0.2s",
+              opacity: loading ? 0.6 : 1,
             }}
+            disabled={loading} // disable during loading
           >
-            Send
+            {loading ? "Sending..." : "Send"}
           </button>
         </form>
       </div>
-      <div style={{
-  position: "fixed",
-  right: 12,
-  bottom: 10,
-  fontSize: 13,
-  color: "#888",
-  background: "rgba(255,255,255,0.85)",
-  padding: "6px 12px",
-  borderRadius: 8,
-  zIndex: 100,
-  boxShadow: "0 1px 4px rgba(0,0,0,0.06)"
-}}>
-  Agent2 (analytics) not implemented due to time constraints.
-</div>
+      <div
+        style={{
+          position: "fixed",
+          right: 12,
+          bottom: 10,
+          fontSize: 13,
+          color: "#888",
+          background: "rgba(255,255,255,0.85)",
+          padding: "6px 12px",
+          borderRadius: 8,
+          zIndex: 100,
+          boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+        }}
+      >
+        Agent2 (analytics) not implemented due to time constraints.
+      </div>
     </div>
   );
 }
