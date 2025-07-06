@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_AGENT1_API_URL;
+const API_URL = import.meta.env.VITE_AGENT1_API_URL || "/api/agent1/chat/";
 
 export default function AgentChat() {
   const [input, setInput] = useState("");
