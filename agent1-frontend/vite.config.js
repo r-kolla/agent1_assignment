@@ -10,7 +10,7 @@ export default defineConfig({
   },
   base: '/static/frontend/',           // ensure correct asset paths
   build: {
-    outDir: '../project_backend/static/frontend',
+    outDir: '../static/frontend',
     assetsDir: 'assets',
     emptyOutDir: true,
   },
