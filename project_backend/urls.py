@@ -10,7 +10,6 @@ def root_redirect(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('agent1.urls')), 
     path("api/agent1/", include("agent1.urls")),
     
     re_path(r'^(?!static/|api/|admin/).*', TemplateView.as_view(template_name="index.html")),
