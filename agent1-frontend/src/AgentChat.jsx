@@ -204,3 +204,9 @@ export default function AgentChat() {
     </div>
   );
 }
+
+console.log("Environment variables:", {
+  VITE_AGENT1_API_URL: import.meta.env.VITE_AGENT1_API_URL,
+  NODE_ENV: import.meta.env.NODE_ENV,
+  MODE: import.meta.env.MODE
+});
